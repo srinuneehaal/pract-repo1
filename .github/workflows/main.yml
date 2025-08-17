@@ -20,15 +20,35 @@ jobs:
         run: echo "Hello, GitHub Actions!"
 
       - name: Print repo secret value
-        run: echo "Secret value is ${{ secrets.SAMPLE_REPO_SEC}}"
+        run: echo "Secret value is ${{ secrets.SAMPLE_REPO_SECRET }}"
       - name: Print repo value
-        run: echo "value is ${{ vars.SAMPLE_REPO_VAR}}"
+        run: echo "value is ${{ vars.SAMPLE_REPO_VAR }}"
       - name: Print global variable
         run: echo "Global variable is $GLOBAL_VAR"
-#      - name: Print environment-specific secret
-#        run: |
-#          if [ "${{ github.ref_name }}" = "master" ]; then
-#            echo "Production secret is ${{ secrets.SAMPLE }}"
-#          elif [ "${{ github.ref_name }}" = "dev" ]; then
-#            echo "Development secret is ${{ secrets.SAMPLE }}"
-#          fi
+
+  DEV:
+    runs-on: ubuntu-latest
+    environment: Dev
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5.0.0
+      - name: Print local environment variable
+        run: echo "value is ${{ vars.MY_VALUE }}"
+
+  SIT:
+    runs-on: ubuntu-latest
+    environment: SIT
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5.0.0
+      - name: Print local environment variable
+        run: echo "value is ${{ vars.MY_VALUE }}"
+
+  PROD:
+    runs-on: ubuntu-latest
+    environment: Prod
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5.0.0
+      - name: Print local environment variable
+        run: echo "value is ${{ vars.MY_VALUE }}"
