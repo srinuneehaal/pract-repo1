@@ -19,6 +19,8 @@ jobs:
 
       - name: Print repo secret value
         run: echo "Secret value is ${{ secrets.SAMPLE_REPO_SEC}}"
+      - name: Print repo value
+        run: echo "value is ${{ vars.SAMPLE_REPO_VAR}}"
 #      - name: Print environment-specific secret
 #        run: |
 #          if [ "${{ github.ref_name }}" = "master" ]; then
