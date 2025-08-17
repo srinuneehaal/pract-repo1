@@ -4,13 +4,25 @@ on:
   push:
     branches:
       - master
+      - dev
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5.0.0
 
       - name: Run a one-line script
         run: echo "Hello, GitHub Actions!"
+
+      - name: Print secret value
+        run: echo "Secret value is ${{ secrets.SAMPLE}}"
+      - name: Print environment-specific secret
+        run: |
+          if [ "${{ github.ref_name }}" = "master" ]; then
+            echo "Production secret is ${{ secrets.SAMPLE }}"
+          elif [ "${{ github.ref_name }}" = "dev" ]; then
+            echo "Development secret is ${{ secrets.SAMPLE }}"
+          fi
