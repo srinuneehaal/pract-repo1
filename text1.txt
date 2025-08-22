@@ -3,3 +3,4 @@ text1 - 2
 text1 - 3
 feature_master rebase 1.0
 text1 - 4
+text1 - 5
